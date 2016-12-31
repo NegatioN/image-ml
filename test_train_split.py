@@ -3,15 +3,17 @@ import random
 import shutil
 
 def make_folder(image_type):
-    if not os.path.exists('{}/{}/{}'.format(output_path,image_type, "test")):
-        os.makedirs('{}/{}/{}'.format(output_path,image_type, "test"))
-    if not os.path.exists('{}/{}/{}'.format(output_path,image_type, "train")):
-        os.makedirs('{}/{}/{}'.format(output_path,image_type, "train"))
+    test_dir = '{}/{}/{}'.format(output_path, "test", image_type)
+    if not os.path.exists(test_dir):
+        os.makedirs(test_dir)
+    train_dir = '{}/{}/{}'.format(output_path, "train", image_type)
+    if not os.path.exists(train_dir):
+        os.makedirs(train_dir)
 
 def copy_files(image_type, test_or_train, file_list):
     for filename in file_list:
         shutil.copyfile('{}/{}/{}'.format(input_path, image_type, filename),
-                        '{}/{}/{}/{}'.format(output_path, image_type, test_or_train, filename))
+                        '{}/{}/{}/{}'.format(output_path, test_or_train, image_type, filename))
 train_percent = 80
 
 input_path = "output_ordered"
